@@ -301,7 +301,7 @@ def create_site(site_name, install_erpnext, mysql_password, admin_password, key)
 	)
 	doc.insert()
 	frappe.db.commit()
-
+@frappe.whitelist()
 def jop_site_creation(commands, doctype, key):
     from bench_manager.bench_manager.utils import run_command
     run_command(commands=commands,doctype="Bench Settings",key=key)
@@ -309,3 +309,5 @@ def jop_site_creation(commands, doctype, key):
     if site.developer_flag == 1:
             site.update_app_list()
     site.developer_flag = 0
+    site.save()
+    frappe.db.commit()
