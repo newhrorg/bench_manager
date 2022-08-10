@@ -1,4 +1,5 @@
 from . import __version__ as app_version
+import bench_manager
 
 app_name = "bench_manager"
 app_title = "Bench Manager"
@@ -87,14 +88,17 @@ app_include_js = "/assets/bench_manager/js/bench_manager.js"
 
 # Scheduled Tasks
 # ---------------
+import frappe
+bench_settings_doc  = frappe.get_doc('Bench Settings')
 
-# scheduler_events = {
+
+scheduler_events = {
 # 	"all": [
 # 		"bench_manager.tasks.all"
 # 	],
-# 	"daily": [
-# 		"bench_manager.tasks.daily"
-# 	],
+	# "daily": [
+	# 	"bench_manager.bench_manager.api.call_backub_methode_daily"
+	# ],
 # 	"hourly": [
 # 		"bench_manager.tasks.hourly"
 # 	],
@@ -104,7 +108,14 @@ app_include_js = "/assets/bench_manager/js/bench_manager.js"
 # 	"monthly": [
 # 		"bench_manager.tasks.monthly"
 # 	]
-# }
+}
+
+scheduler_events.update(
+    {"crone":
+        {
+            f"{bench_settings_doc.cron_job}":["bench_manager.bench_manager.api.call_backub_methode"]
+            }
+        })
 
 # Testing
 # -------

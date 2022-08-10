@@ -108,20 +108,19 @@ frappe.ui.form.on('Bench Settings', {
 			});
 		});
 		frm.add_custom_button("Reload", () => {
-			frappe.prompt([
-	  {
-		  label: 'Root Password',
-		  fieldname: 'password',
-		  fieldtype: 'Password'
-	  },
-		  ], (values) => {
-		  frappe.call({
-				  method: "bench_manager.bench_manager.doctype.bench_settings.bench_settings.setup_and_restart_nginx",
-				  args: {
-					  "root_password": values.password
-				  }
-			  });
-		  })
-		  });
+			frappe.prompt([{
+				label: 'Root Password',
+				fieldname: 'password',
+				fieldtype: 'Password'
+			},
+		], (values) => {
+			frappe.call({
+				method: "bench_manager.bench_manager.doctype.bench_settings.bench_settings.setup_and_restart_nginx",
+				args: {
+					"root_password": values.password
+				}
+			});
+		})
+});
 	}
 });
