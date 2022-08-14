@@ -18,7 +18,7 @@ from bench_manager.bench_manager.utils import (
 )
 from frappe.model.document import Document
 
-from datetime import datetime,timedelta
+
 
 
 class Site(Document):
@@ -313,31 +313,5 @@ def jop_site_creation(commands, doctype, key):
     site.save()
     frappe.db.commit()
     
-
-def backup_daily_sites():
-    site_list = frappe.get_list("Site",filters={"frequancy":"Daily","auto_backup":1})
-    if site_list:
-        create_backup(site_list)
-def backup_weekly_sites():
-    site_list = frappe.get_list("Site",filters={"frequancy":"Weekly","auto_backup":1})
-    if site_list:
-        create_backup(site_list)
-
-def backup_monthly_sites():
-    site_list = frappe.get_list("Site",filters={"frequancy":"Monthly","auto_backup":1})
-    if site_list:
-        create_backup(site_list)
-
-def create_backup(site_list):
-    key = datetime.now()
-    for i in site_list:
-        site_doc = frappe.get_doc("Site",i.name)
-        key += timedelta(seconds=1)
-        frappe.enqueue(
-			"bench_manager.bench_manager.utils.run_command",
-			commands=["bench --site {site_name} backup --with-files".format(site_name=i.name)],
-			doctype=site_doc.doctype,
-			key=str(key),
-			docname=i.name,
-			)    
     
+        

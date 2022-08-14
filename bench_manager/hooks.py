@@ -90,13 +90,13 @@ app_include_js = "/assets/bench_manager/js/bench_manager.js"
 
 scheduler_events = {
 	"daily_long": [
-		"bench_manager.bench_manager.doctype.site.site.backup_daily_sites"
+		"bench_manager.bench_manager.doctype.bench_settings.bench_settings.backup_daily_sites"
 	],
     "monthly_long": [
-		"bench_manager.bench_manager.doctype.site.site.backup_monthly_sites"
+		"bench_manager.bench_manager.doctype.bench_settings.bench_settings.backup_monthly_sites"
 	],
     "weekly_long":[
-        "bench_manager.bench_manager.doctype.site.site.backup_weekly_sites"
+        "bench_manager.bench_manager.doctype.bench_settings.bench_settings.backup_weekly_sites"
 		
 	]
 # 	"all": [
