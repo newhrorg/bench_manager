@@ -310,3 +310,15 @@ def jop_site_creation(commands, doctype, key):
             site.update_app_list()
     site.save()
     frappe.db.commit()
+
+@frappe.whitelist()
+def setup_and_restart_nginx():
+    from datetime import datetime
+    from bench_manager.bench_manager.utils import run_command
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    commands = [
+		"bench setup nginx --yes"
+	]
+    commands.append("sudo service nginx reload")
+    run_command(commands,"Bench Settings",dt_string)
