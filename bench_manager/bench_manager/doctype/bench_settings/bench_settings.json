@@ -72,7 +72,7 @@
   },
   {
     "fieldname": "password_root1",
-    "fieldtype": "Data",
+    "fieldtype": "Password",
     "label": "Password Root"
    },
   {
