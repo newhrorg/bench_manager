@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # Copyright (c) 2017, Frappé and contributors
 # For license information, please see license.txt
 
@@ -216,9 +216,10 @@ def get_installable_apps(doctype, docname):
 @frappe.whitelist()
 def get_removable_apps(doctype, docname):
 	verify_whitelisted_call()
-	removable_apps = frappe.get_doc(doctype, docname).app_list.split("\n")
-	removable_apps.remove("frappe")
-	return removable_apps
+	installed_apps = frappe.get_doc(doctype, docname).app_list.split("\n")
+	installed_apps = [install_app.split(" ")[0] for install_app in installed_apps]
+	installed_apps.remove("frappe")
+	return installed_apps
 
 
 @frappe.whitelist()
