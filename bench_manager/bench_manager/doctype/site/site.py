@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 # Copyright (c) 2017, Frappé and contributors
 # For license information, please see license.txt
 
@@ -177,7 +177,8 @@ class Site(Document):
 			"install_app": [
 				"bench --site {site_name} install-app {app_name}".format(
 					site_name=self.name, app_name=app_name
-				)
+				),
+				f"bench --site {self.name} migrate"
 			],
 			"uninstall_app": [
 				"bench --site {site_name} uninstall-app {app_name} --yes".format(
@@ -207,8 +208,9 @@ def get_installable_apps(doctype, docname):
 	with open(app_list_file, "r") as f:
 		apps = f.read().split("\n")
 	installed_apps = frappe.get_doc(doctype, docname).app_list.split("\n")
+	installed_apps = [install_app.split(" ")[0] for install_app in installed_apps]
 	installable_apps = set(apps) - set(installed_apps)
-	return [x for x in installable_apps]
+	return installable_apps
 
 
 @frappe.whitelist()
