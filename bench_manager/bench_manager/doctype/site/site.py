@@ -202,15 +202,18 @@ class Site(Document):
 
 
 @frappe.whitelist()
-def get_installable_apps(doctype, docname):
+def get_installable_apps(site_name):
 	verify_whitelisted_call()
 	app_list_file = "apps.txt"
 	with open(app_list_file, "r") as f:
 		apps = f.read().split("\n")
-	installed_apps = frappe.get_doc(doctype, docname).app_list.split("\n")
-	installed_apps = [install_app.split(" ")[0] for install_app in installed_apps]
-	installable_apps = set(apps) - set(installed_apps)
-	return installable_apps
+	installed_apps = frappe.get_doc("Site", site_name).app_list.split("\n")
+	installed_apps_without_version = []
+	for installed_app in installed_apps:
+		app_name = installed_app.split(" ")[0]
+		installed_apps_without_version.append(app_name)
+
+	return set(apps) - set(installed_apps_without_version)
 
 
 @frappe.whitelist()
