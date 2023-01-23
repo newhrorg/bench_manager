@@ -150,8 +150,7 @@ frappe.ui.form.on('Site', {
 			frappe.call({
 				method: 'bench_manager.bench_manager.doctype.site.site.get_removable_apps',
 				args: {
-					doctype: frm.doctype,
-					docname: frm.doc.name
+					site_name: frm.doc.name
 				},
 				btn: this,
 				callback: function(r) {
