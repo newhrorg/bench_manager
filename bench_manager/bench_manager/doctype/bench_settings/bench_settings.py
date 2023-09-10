@@ -446,7 +446,7 @@ def create_backup(site_list):
         doctype=site_doc.doctype
         key=key.strftime("%Y/%m/%d, %H:%M:%S")
         docname=i.name
-        run_command(commands, doctype, key, docname)
+        run_command(commands, doctype, key, docname=docname)
 
 
 def take_dropbox_backup(site_list):
