@@ -45,7 +45,7 @@ frappe.ui.form.on('Site', {
 				});
 			});
 			dialog.show();
-		}, "Control");
+		}, __("Control"));
 		frm.add_custom_button(__('Delete Alias'), function(){
 			let alias_list = frm.doc.site_alias.split('\n');
 			alias_list.pop();
@@ -67,7 +67,7 @@ frappe.ui.form.on('Site', {
 				});
 			});
 			dialog.show();
-		}, "Control");
+		}, __("Control"));
 		frm.add_custom_button(__('Migrate'), function() {
 			let key = frappe.datetime.get_datetime_as_string();
 			console_dialog(key);
@@ -75,7 +75,7 @@ frappe.ui.form.on('Site', {
 				key: key,
 				caller: 'migrate',
 			});
-		}, "Control");
+		}, __("Control"));
 		frm.add_custom_button(__('Backup'), function() {
 			let key = frappe.datetime.get_datetime_as_string();
 			console_dialog(key);
@@ -83,7 +83,7 @@ frappe.ui.form.on('Site', {
 				key: key,
 				caller: 'backup',
 			});
-		}, "Control");
+		}, __("Control"));
 		frm.add_custom_button(__('Reinstall'), function(){
 			frappe.call({
 				method: 'bench_manager.bench_manager.doctype.site.site.pass_exists',
@@ -116,7 +116,7 @@ frappe.ui.form.on('Site', {
 					dialog.show();
 				}
 			});
-		}, "Control");
+		}, __("Control"));
 		frm.add_custom_button(__('Install App'), function(){
 			frappe.call({
 				method: 'bench_manager.bench_manager.doctype.site.site.get_installable_apps',
@@ -145,7 +145,7 @@ frappe.ui.form.on('Site', {
 					dialog.show();
 				}
 			});
-		}, "Control");
+		}, __("Control"));
 		frm.add_custom_button(__('Uninstall App'), function(){
 			frappe.call({
 				method: 'bench_manager.bench_manager.doctype.site.site.get_removable_apps',
@@ -174,7 +174,7 @@ frappe.ui.form.on('Site', {
 					dialog.show();
 				}
 			});
-		}, "Control");
+		}, __("Control"));
 		frm.add_custom_button(__('Drop Site'), function(){
 			frappe.call({
 				method: 'bench_manager.bench_manager.doctype.site.site.pass_exists',
@@ -236,13 +236,13 @@ frappe.ui.form.on('Site', {
 					dialog.show();
 				}
 			});
-		}, "Control");
+		}, __("Control"));
 		frm.add_custom_button(__('View Site'), () => {
 			frappe.db.get_value('Bench Settings', 'Bench Settings', 'webserver_port',
 				(r) => {
 					window.open(`http://${frm.doc.name}:${r.webserver_port}`, '_blank');
 				}
 			);
-		}, "Control");
+		}, __("Control"));
 	}
 });
